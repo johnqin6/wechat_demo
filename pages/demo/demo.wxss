@@ -1,0 +1,7 @@
+.demo {
+    text-align: center;
+}
+.demo-item {
+    height: 90rpx;
+    line-height: 90rpx;
+}

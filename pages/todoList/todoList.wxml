@@ -1,0 +1,37 @@
+<view class="todoList">
+   <view class="title">todoList</view>
+   <view class="header">
+       <input placeholder="请输入事项"  value="{{ value }}" class="header-input" 
+       bindconfirm="add" bindinput="setValue" bindfocus="clearValue" auto-focus/>
+       <button type="primary" size="mini" class="header-btn" bindtap="add">添加</button>
+   </view>
+   <view class="body">
+       <checkbox-group bindchange="checkboxChange">
+            <view class="todo-item"  wx:for="{{ list }}" wx:for-item="item" wx:key="{{index}}">
+                <!-- <label class="todo-label"> -->
+                    <checkbox checked="{{item.isChoose}}" value="{{ item.id }}" class="todo-check-box"/>
+                    <text wx:if="{{!item.isedit}}">{{ item.title }}</text>
+                    <input value="{{ item.title }}" data-id="{{item.id}}" class="edit-input" auto-focus 
+                    bindinput="setItemTitle" bindconfirm="editTitle" wx:else/>
+                <!-- </label> -->
+                <view class="item-btn">
+                    <button type="primary" size="mini" data-id="{{item.id}}" bindtap="edit">编辑</button>
+                    <button type="warn" size="mini" data-id="{{item.id}}" bindtap="delete">删除</button>
+                </view>
+            </view>  
+        </checkbox-group>
+   </view>
+   <view class="footer">
+        事项是否完成 <switch checked="{{isChecked}}" bindchange="switchChange"/>
+        <view wx:if="{{isChecked}}">
+            <view class="footer-list-item" wx:for="{{finishList}}" wx:for-item="item" wx:key="{{item.id}}">
+                <text>{{ item.title }} --> {{ item.time }}</text>
+            </view>
+        </view>
+        <view wx:else>
+            <view class="footer-list-item" wx:for="{{dealList}}" wx:for-item="item" wx:key="{{item.id}}">
+                <text>{{ item.title }} --> {{ item.time }}</text>
+            </view>
+        </view>
+   </view>
+</view>

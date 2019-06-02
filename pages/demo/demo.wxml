@@ -1,0 +1,8 @@
+<view class="demo">
+    <view class="demo-item" 
+    data-path="{{ demo.path }}"
+    wx:for="{{ demoList }}" wx:for-item="demo" wx:key="index" 
+    bindtap="goDemoItem">
+        <text>{{index + 1}}、 {{ demo.title }} --> {{ demo.id}}</text>
+    </view>
+</view>
