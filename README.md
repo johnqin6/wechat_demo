@@ -11,5 +11,5 @@
   * wx:for 列表渲染
   * input组件，button组件，switch组件 和 checkbox组件
 
-  效果：
-  !(todoList效果图)[https://github.com/johnqin6/wechat_demo/images/todoList_demo.png]
+  效果：   
+  ![todoList效果图](./images/todoList_demo.png)
