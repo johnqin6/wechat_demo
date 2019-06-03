@@ -1,11 +1,12 @@
 {
   "sitemapLocation": "sitemap.json",
   "pages" : [
-      "pages/todoList/todoList",
       "pages/index/index",
       "pages/logs/logs",
-      "pages/demo/demo"
-      
+      "pages/demo/demo",
+      "pages/todoList/todoList",
+      "pages/calc/calc",
+      "pages/history/history"
   ],
   "window": {
       "backgroundTextStyle": "light",
