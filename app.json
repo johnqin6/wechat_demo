@@ -6,7 +6,8 @@
       "pages/demo/demo",
       "pages/todoList/todoList",
       "pages/calc/calc",
-      "pages/history/history"
+      "pages/history/history",
+      "pages/counter/counter"
   ],
   "window": {
       "backgroundTextStyle": "light",
