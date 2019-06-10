@@ -14,14 +14,16 @@
   效果：   
   ![todoList效果图](./images/todoList_demo.png)   
 
-2. 计算器
-  功能：
-  * 加减乘除，清空，历史纪录    
+2. 计算器    
+  功能：    
+  * 加减乘除，清空，历史纪录   
+
   用到的小程序组件和功能：
   * wx:if 条件渲染
   * wx:for 列表渲染
   * 事件
   * wx.setStorageSync() 本地存储
 
-效果图：
+效果图：     
+
 ![计算器](./images/jisuanqi.png)

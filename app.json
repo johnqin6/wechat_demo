@@ -1,13 +1,13 @@
 {
   "sitemapLocation": "sitemap.json",
   "pages" : [
+    "pages/counter/counter",
       "pages/index/index",
       "pages/logs/logs",
       "pages/demo/demo",
       "pages/todoList/todoList",
       "pages/calc/calc",
-      "pages/history/history",
-      "pages/counter/counter"
+      "pages/history/history"
   ],
   "window": {
       "backgroundTextStyle": "light",

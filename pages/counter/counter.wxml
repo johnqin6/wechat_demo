@@ -1,0 +1,15 @@
+<view class="counter">
+    <view class="counter-header">
+        {{ result }}
+    </view>
+    <view class="counter-body">
+        <view class="item" wx:for="{{ keys }}" wx:for-item="arr" wx:key="{{index}}">
+           <view class="key" style="background: {{ key.bgColor}}; width: {{ key.width}};"
+           wx:for="{{ arr }}" wx:for-item="key" wx:key="{{index}}" 
+           id="{{key.title}}" bindtap="clickItem">
+                <icon wx:if="{{key.title === 'history'}}" type="waiting_circle" color="white" class="icon" size="25"/>
+                <text wx:else>{{ key.title }}</text>
+           </view>
+        </view>
+    </view>
+</view>

@@ -5,6 +5,7 @@ Page({
         demoList: [
             { title: 'todoList', id: '2019060201', path: '../todoList/todoList' },
             { title: '计算器', id: '2019060301', path: '../calc/calc' },
+            { title: '改良版计算器', id: '2019060301', path: '../counter/counter' }
         ]
     },
     onLoad() {
