@@ -6,10 +6,17 @@
 }
 
 .counter-header {
+    position: relative;
     height: 25%;
     text-align: right;
     font-size: 50px;
-    line-height: 120px;
+}
+
+.result {
+    position: absolute;
+    right: 0;
+    white-space: normal; 
+    word-break: break-all;
 }
 
 .counter-body {

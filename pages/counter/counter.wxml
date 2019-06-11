@@ -1,6 +1,6 @@
 <view class="counter">
     <view class="counter-header">
-        {{ result }}
+        <text id="result" class="result" style="top: {{top}}px;">{{ result }}</text>
     </view>
     <view class="counter-body">
         <view class="item" wx:for="{{ keys }}" wx:for-item="arr" wx:key="{{index}}">

@@ -1,10 +1,11 @@
 Page({
     data: {
-        result: 0,
+        result: '0',
         bgColor: '#f78d1d',
-        numbers: ['0','1','2','3','4','5','6','7','8','9','.'],
-        operator: ['+','-','x','÷'],
-        arr: [],
+        numbers: ['0','1','2','3','4','5','6','7','8','9','.','+','-','x','÷'],
+        operator: ['+','-','*','/'],
+        logs: [],
+        top: 90,
         keys: [
             [
                 {title: "C", bgColor: '#f78d1d', width: '25%'},
@@ -35,7 +36,8 @@ Page({
                 {title: '.', bgColor: '#f78d1d', width: '25%'},
                 {title: '=', bgColor: '#f78d1d', width: '25%'}
             ]
-        ]
+        ],
+        query: null
     },
     clickItem(e) {
         let title = e.currentTarget.id;
@@ -46,26 +48,42 @@ Page({
             result = this.clearZero();
         }else if(title === '←'){
             result = this.backspace(this.data.result);
-        }else if(this.data.operator(title)){
-            result = this.handleOperator(title);
-        }else if(title === 'history'){
+        }
+        else if(title === 'history'){
             this.setLog();
+            return ;
         }else if(title === '='){
-            result = this.returnResult();
+            result = this.returnResult(title);
         }
         this.setData({
             result: result
         });
-        console.log(this.data.result,this.data.arr);
+        let query = wx.createSelectorQuery();
+        query.select('#result').boundingClientRect(rect => {
+            console.log(rect);
+            if(rect.width > 360){
+                this.setData({
+                    top: 30
+                });
+            }
+        }).exec();
+        console.log(this.data.result);
     },
     //点击数字或点的处理函数
     handleNumberAndDot(val) {
-        let result = ''
-        if(this.data.result === 0) {
-            result = '';
-        }else {
-            result = this.data.result;
+        let len = this.data.result.length;
+        let tepResult = this.data.result;
+        let arr = ['+','.','-','x','÷'];
+        //防止初次选零,运算符和点
+        if(len === 1 && (val == 0 || arr.includes(val))){
+            return '0';
+        }else if(arr.includes(tepResult[len - 1]) && arr.includes(val)){ //防止连续选零,运算符和点
+            return tepResult;
         }
+        if(tepResult == 0){
+            tepResult = '';
+        }
+        let result = tepResult;
         result += val;
         return result;
     },
@@ -82,20 +100,36 @@ Page({
         }
         return val;
     },
-    handleOperator(val) {
-        let result = this.data.result + val;
-        let arr = this.data.arr;
-        arr[arr.length - 1] = this.data.result;
-        arr[arr.length - 1] = val;
-        return result;
-    },
     //建立历史记录
     setLog() {
-
+        wx.navigateTo({
+            url: '../history/history'
+        });
     },
     //返回最终结果
-    returnResult() {
-        let result = this.data.result;
-        let arr = ['+','-','x','']
+    returnResult(val) {
+        let tmpResult = this.data.result + val; //存储带等于号的字符串
+        let reg = /\d+\.?\d*[+|\-|x|÷|=]/g;
+        let arr = tmpResult.match(reg);
+        let result = parseFloat(arr[0].slice(0,-1)); //初始值 
+        for(let i = 0; i < arr.length - 1; i++){
+            let num = arr[i + 1].slice(0,-1);
+            if(arr[i][arr[i].length - 1] === '+'){
+                result += parseFloat(num);
+            }else if(arr[i][arr[i].length - 1] === '-'){
+                result -= parseFloat(num);
+            }else if(arr[i][arr[i].length - 1] === 'x'){
+                result *= parseFloat(num);
+            }else if(arr[i][arr[i].length - 1] === '÷'){
+                result /= parseFloat(num);
+            }
+        }
+        let logs = this.data.logs;
+        logs.push(result);
+        this.setData({
+            logs: logs
+        });
+        wx.setStorageSync("calclogs", this.data.logs);
+        return result;
     }
 })
